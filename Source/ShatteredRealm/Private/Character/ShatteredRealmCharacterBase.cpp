@@ -1,7 +1,7 @@
 // Copyright Spellbound Studios.
 
 
-#include "..\..\Public\Character\SRCharacterBase.h"
+#include "..\..\Public\Character\ShatteredRealmCharacterBase.h"
 
 AShatteredRealmCharacterBase::AShatteredRealmCharacterBase()
 {

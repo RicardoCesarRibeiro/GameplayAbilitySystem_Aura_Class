@@ -1,23 +1,23 @@
 // Copyright Spellbound Studios.
 
 
-#include "..\..\Public\Player\SRPlayerController.h"
+#include "..\..\Public\Player\ShatteredRealmPlayerController.h"
 
 #include "EnhancedInputSubsystems.h"
 
-AAuraPlayerController::AAuraPlayerController()
+AShatteredRealmPlayerController::AShatteredRealmPlayerController()
 {
 	bReplicates = true;
 }
 
-void AAuraPlayerController::BeginPlay()
+void AShatteredRealmPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	check(AuraContext);
+	check(ShatteredRealmContext);
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	check(Subsystem);
-	Subsystem->AddMappingContext(AuraContext,0);
+	Subsystem->AddMappingContext(ShatteredRealmContext,0);
 	
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;

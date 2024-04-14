@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class ShatteredRealm_API AShatteredRealmEnemy : public AShatteredRealmCharacterBase
+class SHATTEREDREALM_API AShatteredRealmEnemy : public AShatteredRealmCharacterBase
 {
 	GENERATED_BODY()
 	

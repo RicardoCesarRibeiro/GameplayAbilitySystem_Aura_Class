@@ -7,7 +7,7 @@
 #include "ShatteredRealmCharacterBase.generated.h"
 
 UCLASS(Abstract)
-class ShatteredRealm_API AShatteredRealmCharacterBase : public ACharacter
+class SHATTEREDREALM_API AShatteredRealmCharacterBase : public ACharacter
 {
 	GENERATED_BODY()
 

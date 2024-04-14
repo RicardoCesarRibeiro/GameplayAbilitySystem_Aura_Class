@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "SRPlayerController.generated.h"
+#include "ShatteredRealmPlayerController.generated.h"
 
 class UInputMappingContext;
 
@@ -12,9 +12,10 @@ class UInputMappingContext;
  * 
  */
 UCLASS()
-class ShatteredRealm_API AShatteredRealmPlayerController : public APlayerController
+class SHATTEREDREALM_API AShatteredRealmPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+	
 public:
 	AShatteredRealmPlayerController();
 	
