@@ -1,9 +1,9 @@
 // Copyright Spellbound Studios.
 
 
-#include "Character/AuraCharacterBase.h"
+#include "..\..\Public\Character\SRCharacterBase.h"
 
-AAuraCharacterBase::AAuraCharacterBase()
+AShatteredRealmCharacterBase::AShatteredRealmCharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
@@ -11,7 +11,7 @@ AAuraCharacterBase::AAuraCharacterBase()
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-void AAuraCharacterBase::BeginPlay()
+void AShatteredRealmCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
