@@ -4,18 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "ShatteredRealmCharacterBase.generated.h"
+#include "SR_CharacterBase.generated.h"
 
 UCLASS(Abstract)
-class SHATTEREDREALM_API AShatteredRealmCharacterBase : public ACharacter
+class SHATTEREDREALM_API ASR_CharacterBase : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	AShatteredRealmCharacterBase();
+	ASR_CharacterBase();
 
 protected:
 	virtual void BeginPlay() override;
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
+	
+	
 };

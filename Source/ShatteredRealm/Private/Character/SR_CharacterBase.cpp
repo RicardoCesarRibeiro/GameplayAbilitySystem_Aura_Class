@@ -1,9 +1,9 @@
 // Copyright Spellbound Studios.
 
 
-#include "..\..\Public\Character\ShatteredRealmCharacterBase.h"
+#include "..\..\Public\Character\SR_CharacterBase.h"
 
-AShatteredRealmCharacterBase::AShatteredRealmCharacterBase()
+ASR_CharacterBase::ASR_CharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
@@ -11,7 +11,7 @@ AShatteredRealmCharacterBase::AShatteredRealmCharacterBase()
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-void AShatteredRealmCharacterBase::BeginPlay()
+void ASR_CharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
