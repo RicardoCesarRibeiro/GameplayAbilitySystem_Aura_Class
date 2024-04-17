@@ -17,7 +17,13 @@ class SHATTEREDREALM_API ASR_Enemy : public ASR_CharacterBase, public IEnemyInte
 
 public:
 	ASR_Enemy();
+
+
+	/** Enemy Interface */
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
-	
+	/** end Enemy Interface */
+
+protected:
+	virtual void BeginPlay() override;
 };

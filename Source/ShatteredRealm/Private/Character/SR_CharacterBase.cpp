@@ -11,6 +11,11 @@ ASR_CharacterBase::ASR_CharacterBase()
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+UAbilitySystemComponent* ASR_CharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 void ASR_CharacterBase::BeginPlay()
 {
 	Super::BeginPlay();

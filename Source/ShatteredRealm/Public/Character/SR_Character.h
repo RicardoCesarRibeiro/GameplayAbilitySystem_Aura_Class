@@ -16,4 +16,9 @@ class SHATTEREDREALM_API ASR_Character : public ASR_CharacterBase
 
 public:
 	ASR_Character();
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+	
+private:
+	void InitAbilityActorInfo();
 };
