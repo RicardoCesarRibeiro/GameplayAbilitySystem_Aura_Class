@@ -30,9 +30,6 @@ void ASR_HUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyste
 	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
 
 	OverlayWidget->SetWidgetController(WidgetController);
-
-
-
 	
 	Widget->AddToViewport();
 }
