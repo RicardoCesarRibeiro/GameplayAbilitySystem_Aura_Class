@@ -86,8 +86,11 @@ void ASR_PlayerController::BeginPlay()
 	check(SRContext);
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
-	Subsystem->AddMappingContext(SRContext,0);
+	if(Subsystem)
+	{
+		Subsystem->AddMappingContext(SRContext,0);
+	}
+	
 	
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;

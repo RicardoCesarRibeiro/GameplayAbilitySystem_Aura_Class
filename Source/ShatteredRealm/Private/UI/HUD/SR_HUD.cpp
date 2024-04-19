@@ -21,7 +21,7 @@ UOverlayWidgetController* ASR_HUD::GetOverlayWidgetController(const FWidgetContr
 void ASR_HUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
 {
 	checkf(OverlayWidgetClass, TEXT ("Overlay Widget Class uninitialized, please fill out SR_HUD"));
-	checkf(OverlayWidgetController, TEXT("Overlay Widget Controller Class uninitialized, please fill out SR_HUD"));
+	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Controller Class uninitialized, please fill out SR_HUD"));
 	
 	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
 	OverlayWidget = Cast<USR_UserWidget>(Widget);
@@ -30,6 +30,7 @@ void ASR_HUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyste
 	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
 
 	OverlayWidget->SetWidgetController(WidgetController);
+	WidgetController->BroadcastInitialValues();
 	
 	Widget->AddToViewport();
 }

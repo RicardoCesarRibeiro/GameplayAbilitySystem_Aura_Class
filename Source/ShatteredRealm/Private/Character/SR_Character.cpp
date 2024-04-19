@@ -5,7 +5,9 @@
 
 #include "AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/SR_PlayerController.h"
 #include "Player/SR_PlayerState.h"
+#include "UI/HUD/SR_HUD.h"
 
 ASR_Character::ASR_Character()
 {
@@ -45,6 +47,14 @@ void ASR_Character::InitAbilityActorInfo()
 	Sr_PlayerState->GetAbilitySystemComponent()-> InitAbilityActorInfo(Sr_PlayerState, this);
 	AbilitySystemComponent= Sr_PlayerState->GetAbilitySystemComponent();
 	AttributeSet = Sr_PlayerState->GetAttributeSet();
+
+	if (ASR_PlayerController*Sr_PlayerController = Cast<ASR_PlayerController>(GetController()))
+	{
+		if(ASR_HUD* Sr_HUD = Cast<ASR_HUD>(Sr_PlayerController->GetHUD()))
+		{
+			Sr_HUD->InitOverlay(Sr_PlayerController, Sr_PlayerState, AbilitySystemComponent, AttributeSet);
+		}
+	}
 	
 }
 

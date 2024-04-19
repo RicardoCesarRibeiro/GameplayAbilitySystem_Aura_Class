@@ -11,3 +11,13 @@ void USR_WidgetController::SetWidgetControllerParams(const FWidgetControllerPara
 	AttributeSet = WCParams.AttributeSet;
 	
 }
+
+void USR_WidgetController::BroadcastInitialValues()
+{
+	
+}
+
+void USR_WidgetController::BindCallbackstoDependencies()
+{
+	
+}
