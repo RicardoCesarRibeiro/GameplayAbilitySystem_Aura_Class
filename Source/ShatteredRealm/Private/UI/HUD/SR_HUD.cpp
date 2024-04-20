@@ -12,7 +12,7 @@ UOverlayWidgetController* ASR_HUD::GetOverlayWidgetController(const FWidgetContr
 	{
 		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
 		OverlayWidgetController->SetWidgetControllerParams(WCParams);
-
+		OverlayWidgetController->BindCallbackstoDependencies();
 		return OverlayWidgetController;
 	}
 	return OverlayWidgetController;

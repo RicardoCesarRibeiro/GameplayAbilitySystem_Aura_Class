@@ -7,6 +7,8 @@
 #include "GameFramework/Actor.h"
 #include "SR_EffectActor.generated.h"
 
+class UGameplayEffect;
+
 UCLASS()
 class SHATTEREDREALM_API ASR_EffectActor : public AActor
 {
@@ -16,22 +18,19 @@ public:
 
 	ASR_EffectActor();
 
-	UFUNCTION()
-	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	virtual void EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
 	
 protected:
 
 	virtual void BeginPlay() override;
 
-private:
+	UFUNCTION(BlueprintCallable)
+	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
 	
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<USphereComponent> Sphere;
 
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UStaticMeshComponent> Mesh;
+	UPROPERTY( EditAnywhere, BlueprintReadOnly,Category = "Applied Effects")
+	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
+
+	UPROPERTY( EditAnywhere, BlueprintReadOnly,Category = "Applied Effects")
+	TSubclassOf<UGameplayEffect> DurationGameplayEffectClass;
+	
 };
