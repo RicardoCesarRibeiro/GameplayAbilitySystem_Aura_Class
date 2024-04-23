@@ -22,3 +22,8 @@ void ASR_CharacterBase::BeginPlay()
 	
 }
 
+void ASR_CharacterBase::InitAbilityActorInfo()
+{
+	
+}
+

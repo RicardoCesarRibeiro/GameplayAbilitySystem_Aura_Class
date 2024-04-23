@@ -35,6 +35,12 @@ void ASR_Enemy::UnHighlightActor()
 void ASR_Enemy::BeginPlay()
 {
 	Super::BeginPlay();
-	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	InitAbilityActorInfo();
 
+}
+
+void ASR_Enemy::InitAbilityActorInfo()
+{
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	Cast<USR_AbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 }

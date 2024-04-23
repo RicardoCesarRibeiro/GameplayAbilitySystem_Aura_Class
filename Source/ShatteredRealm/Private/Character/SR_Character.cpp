@@ -4,6 +4,7 @@
 #include "..\..\Public\Character\SR_Character.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/SR_AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/SR_PlayerController.h"
 #include "Player/SR_PlayerState.h"
@@ -45,6 +46,7 @@ void ASR_Character::InitAbilityActorInfo()
 	ASR_PlayerState* Sr_PlayerState =GetPlayerState<ASR_PlayerState>();
 	check(Sr_PlayerState);
 	Sr_PlayerState->GetAbilitySystemComponent()-> InitAbilityActorInfo(Sr_PlayerState, this);
+	Cast<USR_AbilitySystemComponent>(Sr_PlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 	AbilitySystemComponent= Sr_PlayerState->GetAbilitySystemComponent();
 	AttributeSet = Sr_PlayerState->GetAttributeSet();
 
