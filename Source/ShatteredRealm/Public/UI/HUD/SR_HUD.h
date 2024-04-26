@@ -12,7 +12,7 @@
  * 
  */
 UCLASS()
-class SHATTEREDREALM_API ASR_HUD : public AHUD
+class SHATTEREDREALM_API ASr_HUD : public AHUD
 {
 	GENERATED_BODY()
 	

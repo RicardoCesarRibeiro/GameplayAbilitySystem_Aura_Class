@@ -10,15 +10,18 @@
  * 
  */
 UCLASS()
-class SHATTEREDREALM_API ASR_Character : public ASR_CharacterBase
+class SHATTEREDREALM_API ASr_Character : public ASr_CharacterBase
 {
 	GENERATED_BODY()
 
 public:
-	ASR_Character();
+	ASr_Character();
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
-	
+
+	/** Combat Interface **/
+	virtual int32 GetPlayerLevel() override;
+	/** End Combat Interface **/
 private:
 	void InitAbilityActorInfo() override;
 };

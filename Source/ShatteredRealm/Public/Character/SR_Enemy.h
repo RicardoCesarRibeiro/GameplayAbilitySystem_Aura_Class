@@ -11,12 +11,12 @@
  * 
  */
 UCLASS()
-class SHATTEREDREALM_API ASR_Enemy : public ASR_CharacterBase, public IEnemyInterface
+class SHATTEREDREALM_API ASr_Enemy : public ASr_CharacterBase, public IEnemyInterface
 {
 	GENERATED_BODY()
 
 public:
-	ASR_Enemy();
+	ASr_Enemy();
 
 
 	/** Enemy Interface */
@@ -24,7 +24,18 @@ public:
 	virtual void UnHighlightActor() override;
 	/** end Enemy Interface */
 
+	/**Combat Interface */
+	virtual int32 GetPlayerLevel() override;
+	/**End Combat Interface */
+
+	
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo() override;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
+	int32 Level = 1;
+
+
+
+
 };

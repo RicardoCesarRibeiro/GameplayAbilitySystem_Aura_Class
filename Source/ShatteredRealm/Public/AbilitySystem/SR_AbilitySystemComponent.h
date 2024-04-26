@@ -6,6 +6,8 @@
 #include "AbilitySystemComponent.h"
 #include "SR_AbilitySystemComponent.generated.h"
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags,const FGameplayTagContainer& /*AssetTags*/);
+
 /**
  * 
  */
@@ -16,6 +18,8 @@ class SHATTEREDREALM_API USR_AbilitySystemComponent : public UAbilitySystemCompo
 
 public:
 	void AbilityActorInfoSet();
+
+	FEffectAssetTags EffectAssetTags;
 	
 protected:
 

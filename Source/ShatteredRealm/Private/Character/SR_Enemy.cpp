@@ -7,7 +7,7 @@
 #include "AbilitySystem/SR_AbilitySystemComponent.h"
 #include "AbilitySystem/SR_AttributeSet.h"
 
-ASR_Enemy::ASR_Enemy()
+ASr_Enemy::ASr_Enemy()
 {
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 
@@ -18,7 +18,7 @@ ASR_Enemy::ASR_Enemy()
 	AttributeSet = CreateDefaultSubobject<USR_AttributeSet>("AttributeSet");
 }
 
-void ASR_Enemy::HighlightActor()
+void ASr_Enemy::HighlightActor()
 {
 	GetMesh()->SetRenderCustomDepth(true);
 	GetMesh()->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
@@ -26,21 +26,29 @@ void ASR_Enemy::HighlightActor()
 	Weapon->SetCustomDepthStencilValue((CUSTOM_DEPTH_RED));
 }
 
-void ASR_Enemy::UnHighlightActor()
+void ASr_Enemy::UnHighlightActor()
 {
 	GetMesh()->SetRenderCustomDepth(false);
 	Weapon->SetRenderCustomDepth(false);
 }
 
-void ASR_Enemy::BeginPlay()
+int32 ASr_Enemy::GetPlayerLevel()
+{
+	return Level;
+}
+
+void ASr_Enemy::BeginPlay()
 {
 	Super::BeginPlay();
 	InitAbilityActorInfo();
 
 }
 
-void ASR_Enemy::InitAbilityActorInfo()
+void ASr_Enemy::InitAbilityActorInfo()
 {
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<USR_AbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
+
+
+	
 }

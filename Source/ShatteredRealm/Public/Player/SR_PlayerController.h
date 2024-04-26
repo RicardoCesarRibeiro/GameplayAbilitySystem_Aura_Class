@@ -16,12 +16,12 @@ class IEnemyInterface;
  * 
  */
 UCLASS()
-class SHATTEREDREALM_API ASR_PlayerController : public APlayerController
+class SHATTEREDREALM_API ASr_PlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
 public:
-	ASR_PlayerController();
+	ASr_PlayerController();
 	virtual void PlayerTick(float DeltaTime) override;
 	
 protected:
@@ -38,7 +38,7 @@ private:
 	void Move(const FInputActionValue& InputActionValue);
 
 	void CursorTrace();
-	TObjectPtr<IEnemyInterface> LastActor;
-	TObjectPtr<IEnemyInterface> ThisActor;
+	IEnemyInterface* LastActor;
+	IEnemyInterface* ThisActor;
 	
 };

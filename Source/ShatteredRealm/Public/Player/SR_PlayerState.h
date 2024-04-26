@@ -14,23 +14,35 @@ class UAttributeSet;
  * 
  */
 UCLASS()
-class SHATTEREDREALM_API ASR_PlayerState : public APlayerState, public IAbilitySystemInterface
+class SHATTEREDREALM_API ASr_PlayerState : public APlayerState, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
 public:
 	
-	ASR_PlayerState();
+	ASr_PlayerState();
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	UAttributeSet* GetAttributeSet() const{return AttributeSet;}	
+	UAttributeSet* GetAttributeSet() const{return AttributeSet;}
+	
+	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
 
 protected:
 	
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+
+private:
+
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_Level)
+	int32 Level = 1;
+	
+	UFUNCTION()
+	void OnRep_Level(int32 OldLevel);
 };
 
 

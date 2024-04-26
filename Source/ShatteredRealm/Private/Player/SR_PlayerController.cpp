@@ -7,12 +7,12 @@
 #include "EnhancedInputComponent.h"
 #include "Interaction/EnemyInterface.h"
 
-ASR_PlayerController::ASR_PlayerController()
+ASr_PlayerController::ASr_PlayerController()
 {
 	bReplicates = true;
 }
 
-void ASR_PlayerController::PlayerTick(float DeltaTime)
+void ASr_PlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
@@ -20,7 +20,7 @@ void ASR_PlayerController::PlayerTick(float DeltaTime)
 	
 }
 
-void ASR_PlayerController::CursorTrace()
+void ASr_PlayerController::CursorTrace()
 {
 	FHitResult CursorHit;
 	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
@@ -80,7 +80,7 @@ void ASR_PlayerController::CursorTrace()
 }
 
 
-void ASR_PlayerController::BeginPlay()
+void ASr_PlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	check(SRContext);
@@ -102,16 +102,16 @@ void ASR_PlayerController::BeginPlay()
 	
 }
 
-void ASR_PlayerController::SetupInputComponent()
+void ASr_PlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
 	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
 	
-	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASR_PlayerController::Move);
+	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASr_PlayerController::Move);
 }
 
-void ASR_PlayerController::Move(const FInputActionValue& InputActionValue)
+void ASr_PlayerController::Move(const FInputActionValue& InputActionValue)
 {
 	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
 	const FRotator Rotation = GetControlRotation();

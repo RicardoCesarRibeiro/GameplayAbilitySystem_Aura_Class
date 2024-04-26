@@ -5,8 +5,9 @@
 
 #include "AbilitySystem/SR_AbilitySystemComponent.h"
 #include "AbilitySystem/SR_AttributeSet.h"
+#include "Net/UnrealNetwork.h"
 
-ASR_PlayerState::ASR_PlayerState()
+ASr_PlayerState::ASr_PlayerState()
 {
 	AbilitySystemComponent = CreateDefaultSubobject<USR_AbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
@@ -17,7 +18,20 @@ ASR_PlayerState::ASR_PlayerState()
 	NetUpdateFrequency = 100.f;
 }
 
-UAbilitySystemComponent* ASR_PlayerState::GetAbilitySystemComponent() const
+void ASr_PlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ASr_PlayerState, Level);
+	
+}
+
+UAbilitySystemComponent* ASr_PlayerState::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
+}
+
+void ASr_PlayerState::OnRep_Level(int32 OldLevel)
+{
+	
 }

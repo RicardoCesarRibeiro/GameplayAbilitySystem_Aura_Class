@@ -6,7 +6,7 @@
 #include "UI/Widget/SR_UserWidget.h"
 
 
-UOverlayWidgetController* ASR_HUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
+UOverlayWidgetController* ASr_HUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
 {
 	if (OverlayWidgetController ==nullptr)
 	{
@@ -18,7 +18,7 @@ UOverlayWidgetController* ASR_HUD::GetOverlayWidgetController(const FWidgetContr
 	return OverlayWidgetController;
 }
 
-void ASR_HUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
+void ASr_HUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
 {
 	checkf(OverlayWidgetClass, TEXT ("Overlay Widget Class uninitialized, please fill out SR_HUD"));
 	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Controller Class uninitialized, please fill out SR_HUD"));

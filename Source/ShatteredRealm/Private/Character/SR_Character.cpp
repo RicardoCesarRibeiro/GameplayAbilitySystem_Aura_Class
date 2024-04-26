@@ -10,7 +10,7 @@
 #include "Player/SR_PlayerState.h"
 #include "UI/HUD/SR_HUD.h"
 
-ASR_Character::ASR_Character()
+ASr_Character::ASr_Character()
 {
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f,400.f, 0.f );
@@ -23,7 +23,7 @@ ASR_Character::ASR_Character()
 	
 }
 
-void ASR_Character::PossessedBy(AController* NewController)
+void ASr_Character::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 	
@@ -32,7 +32,7 @@ void ASR_Character::PossessedBy(AController* NewController)
 
 }
 
-void ASR_Character::OnRep_PlayerState()
+void ASr_Character::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
 	
@@ -41,22 +41,30 @@ void ASR_Character::OnRep_PlayerState()
 	
 }
 
-void ASR_Character::InitAbilityActorInfo()
+int32 ASr_Character::GetPlayerLevel()
 {
-	ASR_PlayerState* Sr_PlayerState =GetPlayerState<ASR_PlayerState>();
+	const ASr_PlayerState* Sr_PlayerState =GetPlayerState<ASr_PlayerState>();
+	check(Sr_PlayerState);
+	return Sr_PlayerState->GetPlayerLevel();
+}
+
+void ASr_Character::InitAbilityActorInfo()
+{
+	ASr_PlayerState* Sr_PlayerState =GetPlayerState<ASr_PlayerState>();
 	check(Sr_PlayerState);
 	Sr_PlayerState->GetAbilitySystemComponent()-> InitAbilityActorInfo(Sr_PlayerState, this);
 	Cast<USR_AbilitySystemComponent>(Sr_PlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 	AbilitySystemComponent= Sr_PlayerState->GetAbilitySystemComponent();
 	AttributeSet = Sr_PlayerState->GetAttributeSet();
 
-	if (ASR_PlayerController*Sr_PlayerController = Cast<ASR_PlayerController>(GetController()))
+	if (ASr_PlayerController*Sr_PlayerController = Cast<ASr_PlayerController>(GetController()))
 	{
-		if(ASR_HUD* Sr_HUD = Cast<ASR_HUD>(Sr_PlayerController->GetHUD()))
+		if(ASr_HUD* Sr_HUD = Cast<ASr_HUD>(Sr_PlayerController->GetHUD()))
 		{
 			Sr_HUD->InitOverlay(Sr_PlayerController, Sr_PlayerState, AbilitySystemComponent, AttributeSet);
 		}
 	}
+	InitializeDefaultAttributes();
 	
 }
 
