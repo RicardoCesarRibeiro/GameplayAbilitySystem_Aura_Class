@@ -10,8 +10,7 @@
 
 USR_AttributeSet::USR_AttributeSet()
 {
-	InitHealth(10.f);
-	InitMana(50.f);
+	
 }
 
 void USR_AttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -28,7 +27,7 @@ void USR_AttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	
 	// Secondary Attributes
 
-	
+	DOREPLIFETIME_CONDITION_NOTIFY(USR_AttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(USR_AttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(USR_AttributeSet, HealthRegen, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(USR_AttributeSet, SpecialAbilityRegen, COND_None, REPNOTIFY_Always);
@@ -59,8 +58,8 @@ void USR_AttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	// Vital Attributes
 	DOREPLIFETIME_CONDITION_NOTIFY(USR_AttributeSet, Health, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(USR_AttributeSet, Mana, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(USR_AttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(USR_AttributeSet, SpecialAbility, COND_None, REPNOTIFY_Always);
+	
 }
 // Clamp on PreAttributeChange
 
