@@ -28,6 +28,7 @@ struct FWidgetControllerParams
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent = nullptr;
+	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UAttributeSet> AttributeSet = nullptr;
@@ -48,8 +49,10 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
+
+	UFUNCTION(BlueprintCallable)
 	virtual void BroadcastInitialValues();
-	virtual void BindCallbackstoDependencies();
+	virtual void BindCallbacksToDependencies();
 	
 	
 protected:

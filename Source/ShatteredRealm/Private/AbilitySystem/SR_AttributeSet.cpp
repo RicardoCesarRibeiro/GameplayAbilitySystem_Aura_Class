@@ -7,9 +7,47 @@
 #include "GameFramework/Character.h"
 #include "GameplayEffectExtension.h"
 #include "Net/UnrealNetwork.h"
+#include "SR_GameplayTags.h"
 
 USR_AttributeSet::USR_AttributeSet()
 {
+	const FSr_GameplayTags& GameplayTags = FSr_GameplayTags::Get();
+	
+
+	/* Primary Attributes */
+	TagsToAttributes.Add(GameplayTags.Attributes_Primary_Strength, GetStrengthAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Primary_Intelligence, GetIntelligenceAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Primary_Dexterity, GetDexterityAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Primary_Vitality, GetVitalityAttribute);
+
+	/* Secondary Attributes */
+
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_Armor, GetArmorAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_ArmorPenetration, GetArmorPenetrationAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_AttackSpeed, GetAttackSpeedAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_BlockChance, GetBlockChanceAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_ColdDamage, GetColdDamageAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_CooldownReduction, GetCooldownReductionAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_DashCooldown, GetDashCooldownAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_DashCount, GetDashCountAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_DashDistance, GetDashDistanceAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_EvadeChance, GetEvadeChanceAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_ExperienceGain, GetExperienceGainAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_FireDamage, GetFireDamageAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_HealingEffectiveness, GetHealingEffectivenessAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_HealthRegen, GetHealthRegenAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_LightningDamage, GetLightningDamageAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_MagicArmor, GetMagicArmorAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_MagicDamage, GetMagicDamageAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_MaxHealth, GetMaxHealthAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_MaxMana, GetMaxManaAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_MovementSpeed, GetMovementSpeedAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_PhysicalDamage, GetPhysicalDamageAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_PickupRadius, GetPickupRadiusAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_AreaOfEffect, GetAreaOfEffectAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_CriticalHitChance, GetCriticalHitChanceAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_CriticalHitDamage, GetCriticalHitDamageAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_SpecialAbilityRegen, GetSpecialAbilityAttribute);
 	
 }
 

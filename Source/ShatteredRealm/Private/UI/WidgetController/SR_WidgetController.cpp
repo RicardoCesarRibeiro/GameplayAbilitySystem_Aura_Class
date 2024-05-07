@@ -17,7 +17,7 @@ void USR_WidgetController::BroadcastInitialValues()
 	
 }
 
-void USR_WidgetController::BindCallbackstoDependencies()
+void USR_WidgetController::BindCallbacksToDependencies()
 {
 	
 }

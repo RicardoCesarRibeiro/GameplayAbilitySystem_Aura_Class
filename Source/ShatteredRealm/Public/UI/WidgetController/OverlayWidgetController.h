@@ -43,7 +43,7 @@ class SHATTEREDREALM_API UOverlayWidgetController : public USR_WidgetController
 	
 public:
 	virtual void  BroadcastInitialValues() override;
-	virtual void BindCallbackstoDependencies() override;
+	virtual void BindCallbacksToDependencies() override;
 
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FOnAttributeChangedSignature OnHealthChanged;

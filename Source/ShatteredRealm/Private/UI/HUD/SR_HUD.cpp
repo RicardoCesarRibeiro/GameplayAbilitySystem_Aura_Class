@@ -4,6 +4,7 @@
 #include "UI/HUD/SR_HUD.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
 #include "UI/Widget/SR_UserWidget.h"
+#include "UI/WidgetController/AttributeMenuWidgetController.h"
 
 
 UOverlayWidgetController* ASr_HUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
@@ -12,10 +13,20 @@ UOverlayWidgetController* ASr_HUD::GetOverlayWidgetController(const FWidgetContr
 	{
 		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
 		OverlayWidgetController->SetWidgetControllerParams(WCParams);
-		OverlayWidgetController->BindCallbackstoDependencies();
-		return OverlayWidgetController;
+		OverlayWidgetController->BindCallbacksToDependencies();
 	}
 	return OverlayWidgetController;
+}
+
+UAttributeMenuWidgetController* ASr_HUD::GetAttributeMenuWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (AttributeMenuWidgetController == nullptr)
+	{
+		AttributeMenuWidgetController = NewObject<UAttributeMenuWidgetController>(this, AttributeMenuWidgetControllerClass);
+		AttributeMenuWidgetController-> SetWidgetControllerParams(WCParams);
+		AttributeMenuWidgetController->BindCallbacksToDependencies();
+	}
+	return AttributeMenuWidgetController;
 }
 
 void ASr_HUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)

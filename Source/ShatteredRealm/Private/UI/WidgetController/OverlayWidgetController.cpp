@@ -17,7 +17,7 @@ void UOverlayWidgetController::BroadcastInitialValues()
 	
 }
 
-void UOverlayWidgetController::BindCallbackstoDependencies()
+void UOverlayWidgetController::BindCallbacksToDependencies()
 {
 	const USR_AttributeSet* Usr_AttributeSet = CastChecked<USR_AttributeSet>(AttributeSet);
 	
