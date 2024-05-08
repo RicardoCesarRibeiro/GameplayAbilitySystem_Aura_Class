@@ -3,6 +3,7 @@
 
 #include "../../Public/Character/SR_CharacterBase.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/SR_AbilitySystemComponent.h"
 
 ASr_CharacterBase::ASr_CharacterBase()
 {
@@ -44,5 +45,14 @@ void ASr_CharacterBase::InitializeDefaultAttributes() const
 	ApplyEffectToSelf(DefaultPrimaryAttributes, 1.f);
 	ApplyEffectToSelf(DefaultSecondaryAttributes, 1.f);
 	ApplyEffectToSelf(DefaultVitalAttributes, 1.f);
+}
+
+void ASr_CharacterBase::AddCharacterAbilities()
+{
+	USR_AbilitySystemComponent* SrASC = CastChecked<USR_AbilitySystemComponent>(AbilitySystemComponent);
+	if (!HasAuthority()) return;
+
+	SrASC->AddCharacterAbilities(StartupAbilities);
+	
 }
 

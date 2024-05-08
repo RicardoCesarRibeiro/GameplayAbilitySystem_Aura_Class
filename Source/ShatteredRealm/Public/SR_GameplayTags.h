@@ -50,8 +50,18 @@ public:
 	FGameplayTag Attributes_Secondary_DashCooldown;
 	FGameplayTag Attributes_Secondary_AreaOfEffect;
 	FGameplayTag Attributes_Secondary_HealingEffectiveness;
+
+
+	FGameplayTag InputTag_LMB;
+	FGameplayTag InputTag_RMB;
+	FGameplayTag InputTag_SPC;
+	FGameplayTag InputTag_1;
+	FGameplayTag InputTag_2;
+	FGameplayTag InputTag_3;
+	FGameplayTag InputTag_4;
 	
-protected:
+	
+
 
 private:
     static FSr_GameplayTags GameplayTags;

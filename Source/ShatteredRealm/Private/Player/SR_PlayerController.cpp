@@ -4,7 +4,7 @@
 #include "..\..\Public\Player\SR_PlayerController.h"
 
 #include "EnhancedInputSubsystems.h"
-#include "EnhancedInputComponent.h"
+#include "Input/SR_InputComponent.h"
 #include "Interaction/EnemyInterface.h"
 
 ASr_PlayerController::ASr_PlayerController()
@@ -28,21 +28,7 @@ void ASr_PlayerController::CursorTrace()
 
 	LastActor = ThisActor;
 	ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
-
-	/**
-	 * Line trace from cursor. There are several scenarios:
-	 * A. LastActor is null && ThisActor is null
-	 *		-Do nothing.
-	 * B. LastActor is null && ThisActor is valid
-	 *		-Highlight ThisActor
-	 * C. LastActor is valid && ThisActor is null
-	 *		-UnHilight LastActor
-	 * D. Both actors are valid, but LastActor != ThisActor
-	 *		- Unhilight LastActor, and Highlight ThisActor
-	 * E. Both actors are valid, and are the same actor
-	 *		- Do nothing.
-	 */		
-
+	
 	if(LastActor == nullptr)
 	{
 		if (ThisActor!= nullptr)
@@ -79,6 +65,21 @@ void ASr_PlayerController::CursorTrace()
 	}
 }
 
+void ASr_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
+{
+	
+}
+
+void ASr_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
+{
+	
+}
+
+void ASr_PlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
+{
+	
+}
+
 
 void ASr_PlayerController::BeginPlay()
 {
@@ -106,9 +107,9 @@ void ASr_PlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
-	
-	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASr_PlayerController::Move);
+	USR_InputComponent* SrInputComponent = CastChecked<USR_InputComponent>(InputComponent);
+	SrInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASr_PlayerController::Move);
+	SrInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 
 void ASr_PlayerController::Move(const FInputActionValue& InputActionValue)

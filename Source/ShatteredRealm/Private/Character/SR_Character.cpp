@@ -29,6 +29,7 @@ void ASr_Character::PossessedBy(AController* NewController)
 	
 	// Init ability actor info for the Server
 	InitAbilityActorInfo();
+	AddCharacterAbilities();
 
 }
 
