@@ -24,6 +24,12 @@ void ASr_CharacterBase::BeginPlay()
 	
 }
 
+FVector ASr_CharacterBase::GetCombatSocketLocation()
+{
+	check(Weapon);
+	return Weapon->GetSocketLocation(WeaponTipSocketName);
+}
+
 void ASr_CharacterBase::InitAbilityActorInfo()
 {
 	

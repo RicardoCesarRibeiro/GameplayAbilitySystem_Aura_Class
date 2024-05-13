@@ -14,6 +14,8 @@ class UInputAction;
 struct FInputActionValue;
 class IEnemyInterface;
 class USR_InputConfig;
+class USR_AbilitySystemComponent;
+class USplineComponent;
 
 /**
  * 
@@ -43,6 +45,7 @@ private:
 	void CursorTrace();
 	IEnemyInterface* LastActor;
 	IEnemyInterface* ThisActor;
+	FHitResult CursorHit;
 
 	void AbilityInputTagPressed(FGameplayTag InputTag);
 	void AbilityInputTagReleased(FGameplayTag InputTag);
@@ -50,5 +53,27 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<USR_InputConfig> InputConfig;
+
+	UPROPERTY()
+	TObjectPtr<USR_AbilitySystemComponent> Sr_AbilitySystemComponent;
+
+	USR_AbilitySystemComponent* GetASC();
+
+
+	
+	FVector CacheDestination = FVector::ZeroVector;
+	float FollowTime = 0.f;
+	float ShortPressThreshold = 0.5f;
+	bool bAutoRunning = false;
+	bool bTargeting = false;
+
+	UPROPERTY(EditDefaultsOnly)
+	float AutoRunningAcceptanceRadius = 50.f;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<USplineComponent> Spline;
+
+	void AutoRun();
+
 	
 };
