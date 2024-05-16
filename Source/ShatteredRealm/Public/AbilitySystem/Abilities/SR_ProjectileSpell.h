@@ -7,6 +7,8 @@
 #include "SR_ProjectileSpell.generated.h"
 
 class ASR_Projectile;
+class UGameplayEffect;
+
 /**
  * 
  */
@@ -24,4 +26,7 @@ protected:
 	
 	UPROPERTY(EditAnywhere,BlueprintReadOnly)
 	TSubclassOf<ASR_Projectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UGameplayEffect> DamageEffectClass;
 };

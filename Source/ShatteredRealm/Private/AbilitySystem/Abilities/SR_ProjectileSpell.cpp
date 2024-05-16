@@ -3,6 +3,8 @@
 
 #include "AbilitySystem/Abilities/SR_ProjectileSpell.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
 #include "Actor/SR_Projectile.h"
 #include "Interaction/CombatInterface.h"
 
@@ -41,6 +43,10 @@ void USR_ProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocatio
 
 		//TODO: Give the Projectile a GP Effect Spec for causing Damage.
 		
+		const UAbilitySystemComponent* SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());
+		const FGameplayEffectSpecHandle SpecHandle =  SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(),SourceASC->MakeEffectContext());
+
+		Projectile->DamageEffectSpecHandle = SpecHandle;
 		Projectile->FinishSpawning(SpawnTransform);
 	}
 }

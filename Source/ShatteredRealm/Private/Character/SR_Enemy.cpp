@@ -5,7 +5,10 @@
 
 #include "..\..\ShatteredRealm\ShatteredRealms.h"
 #include "AbilitySystem/SR_AbilitySystemComponent.h"
+#include "AbilitySystem/SR_AbilitySystemLibrary.h"
 #include "AbilitySystem/SR_AttributeSet.h"
+#include "Components/WidgetComponent.h"
+#include "UI/Widget/SR_UserWidget.h"
 
 ASr_Enemy::ASr_Enemy()
 {
@@ -16,6 +19,9 @@ ASr_Enemy::ASr_Enemy()
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 	
 	AttributeSet = CreateDefaultSubobject<USR_AttributeSet>("AttributeSet");
+
+	HealthBar = CreateDefaultSubobject<UWidgetComponent>("HealthBar");
+	HealthBar->SetupAttachment(GetRootComponent());
 }
 
 void ASr_Enemy::HighlightActor()
@@ -42,13 +48,42 @@ void ASr_Enemy::BeginPlay()
 	Super::BeginPlay();
 	InitAbilityActorInfo();
 
+	//Set WidgetController
+	if (USR_UserWidget* SrUserWidget = Cast<USR_UserWidget>(HealthBar->GetUserWidgetObject()))
+	{
+		SrUserWidget->SetWidgetController(this);
+	}
+	// Bind Health change Delegates
+	if(const USR_AttributeSet* Sr_AS = Cast<USR_AttributeSet>(AttributeSet))
+	{
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Sr_AS->GetHealthAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+			{
+				OnHealthChanged.Broadcast(Data.NewValue);
+			}
+		);
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Sr_AS->GetMaxHealthAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+			{
+				OnMaxHealthChanged.Broadcast(Data.NewValue);
+			}
+		);
+		
+		OnHealthChanged.Broadcast(Sr_AS->GetHealth());
+		OnMaxHealthChanged.Broadcast(Sr_AS->GetMaxHealth());
+	}
+	
 }
 
 void ASr_Enemy::InitAbilityActorInfo()
 {
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<USR_AbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
-
-
 	
+	InitializeDefaultAttributes();
+}
+
+void ASr_Enemy::InitializeDefaultAttributes() const
+{
+	USR_AbilitySystemLibrary::InitializeDefaultAttributes(this, CharacterClass, Level, AbilitySystemComponent);
 }

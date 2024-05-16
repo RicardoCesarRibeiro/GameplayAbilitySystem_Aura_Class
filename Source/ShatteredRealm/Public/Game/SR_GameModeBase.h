@@ -9,9 +9,17 @@
 /**
  * 
  */
+
+class UCharacterClassInfo;
+
 UCLASS()
 class SHATTEREDREALM_API AShatteredRealmGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Character Class Defaults")
+	TObjectPtr<UCharacterClassInfo> CharacterClassInfo;
 	
 };
