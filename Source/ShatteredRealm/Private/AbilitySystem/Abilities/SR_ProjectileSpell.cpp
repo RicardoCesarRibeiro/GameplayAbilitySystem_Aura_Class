@@ -7,6 +7,7 @@
 #include "AbilitySystemComponent.h"
 #include "Actor/SR_Projectile.h"
 #include "Interaction/CombatInterface.h"
+#include "ShatteredRealm/Public/SR_GameplayTags.h"
 
 
 void USR_ProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
@@ -46,7 +47,12 @@ void USR_ProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocatio
 		const UAbilitySystemComponent* SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());
 		const FGameplayEffectSpecHandle SpecHandle =  SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(),SourceASC->MakeEffectContext());
 
+		const FSr_GameplayTags GameplayTags = FSr_GameplayTags::Get();
+		const float ScaledDamage = Damage.GetValueAtLevel(GetAbilityLevel());
+		
+		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, GameplayTags.Damage, ScaledDamage);
 		Projectile->DamageEffectSpecHandle = SpecHandle;
+		
 		Projectile->FinishSpawning(SpawnTransform);
 	}
 }

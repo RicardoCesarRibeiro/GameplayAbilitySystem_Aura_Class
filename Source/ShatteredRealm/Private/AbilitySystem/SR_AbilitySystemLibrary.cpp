@@ -68,3 +68,16 @@ void USR_AbilitySystemLibrary::InitializeDefaultAttributes(const UObject* WorldC
 	const FGameplayEffectSpecHandle VitalAttributesSpecHandle = ASC->MakeOutgoingSpec(ClassDefaultInfo.VitalAttributes, Level, VitalAttributesContextHandle);
 	ASC->ApplyGameplayEffectSpecToSelf(*VitalAttributesSpecHandle.Data.Get());
 }
+
+void USR_AbilitySystemLibrary::GiveStartupAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC)
+{
+	AShatteredRealmGameModeBase* Sr_GameMode = Cast<AShatteredRealmGameModeBase>(UGameplayStatics::GetGameMode(WorldContextObject));
+	if (Sr_GameMode == nullptr) return;
+
+	UCharacterClassInfo* CharacterClassInfo = Sr_GameMode->CharacterClassInfo;
+	for ( TSubclassOf<UGameplayAbility> AbilityClass : CharacterClassInfo->CommonAbilities)
+	{
+		FGameplayAbilitySpec AbilitySpec =  FGameplayAbilitySpec(AbilityClass, 1);
+		ASC->GiveAbility(AbilitySpec);
+	}
+}

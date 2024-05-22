@@ -1,14 +1,16 @@
 // Copyright Spellbound Studios.
 
 
-#include "..\..\Public\Character\SR_Enemy.h"
-
-#include "..\..\ShatteredRealm\ShatteredRealms.h"
+#include "ShatteredRealm/Public/Character/SR_Enemy.h"
+#include "ShatteredRealm/ShatteredRealms.h"
 #include "AbilitySystem/SR_AbilitySystemComponent.h"
 #include "AbilitySystem/SR_AbilitySystemLibrary.h"
 #include "AbilitySystem/SR_AttributeSet.h"
 #include "Components/WidgetComponent.h"
 #include "UI/Widget/SR_UserWidget.h"
+#include "GameplayTags.h"
+#include "SR_GameplayTags.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 ASr_Enemy::ASr_Enemy()
 {
@@ -43,10 +45,14 @@ int32 ASr_Enemy::GetPlayerLevel()
 	return Level;
 }
 
+
+
 void ASr_Enemy::BeginPlay()
 {
 	Super::BeginPlay();
+	GetCharacterMovement()-> MaxWalkSpeed = BaseWalkSpeed;
 	InitAbilityActorInfo();
+	USR_AbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
 
 	//Set WidgetController
 	if (USR_UserWidget* SrUserWidget = Cast<USR_UserWidget>(HealthBar->GetUserWidgetObject()))
@@ -69,11 +75,25 @@ void ASr_Enemy::BeginPlay()
 			}
 		);
 		
+		AbilitySystemComponent->RegisterGameplayTagEvent(FSr_GameplayTags::Get().Effects_HitReact, EGameplayTagEventType::NewOrRemoved).AddUObject(
+			this,
+			&ASr_Enemy::HitReactTagChanged
+		);
+		
 		OnHealthChanged.Broadcast(Sr_AS->GetHealth());
 		OnMaxHealthChanged.Broadcast(Sr_AS->GetMaxHealth());
 	}
 	
 }
+
+void ASr_Enemy::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
+{
+	bHitReacting = NewCount > 0;
+	GetCharacterMovement()-> MaxWalkSpeed = bHitReacting ? 0.f : BaseWalkSpeed;
+}
+
+
+
 
 void ASr_Enemy::InitAbilityActorInfo()
 {

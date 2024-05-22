@@ -1,7 +1,7 @@
 // Copyright Spellbound Studios.
 
 
-#include "../../Public/Character/SR_CharacterBase.h"
+#include "Character/SR_CharacterBase.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/SR_AbilitySystemComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -25,6 +25,11 @@ ASr_CharacterBase::ASr_CharacterBase()
 UAbilitySystemComponent* ASr_CharacterBase::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
+}
+
+UAnimMontage* ASr_CharacterBase::GetHitReactMontage_Implementation()
+{
+	return HitReactMontage;
 }
 
 void ASr_CharacterBase::BeginPlay()

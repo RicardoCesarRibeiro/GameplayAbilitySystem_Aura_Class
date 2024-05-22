@@ -2,6 +2,8 @@
 
 #pragma once
 
+
+
 #include "CoreMinimal.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemInterface.h"
@@ -13,6 +15,7 @@ class UAbilitySystemComponent;
 class UAttributeSet;
 class UGameplayEffect;
 class UGameplayAbility;
+class UAnimMontage;
 
 UCLASS(Abstract)
 class SHATTEREDREALM_API ASr_CharacterBase : public ACharacter, public IAbilitySystemInterface, public ICombatInterface
@@ -20,11 +23,16 @@ class SHATTEREDREALM_API ASr_CharacterBase : public ACharacter, public IAbilityS
 	GENERATED_BODY()
 
 public:
+	
 	ASr_CharacterBase();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const{return AttributeSet;}
 
+	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+
+	
 protected:
+	
 	virtual void BeginPlay() override;
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
@@ -50,6 +58,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
 	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Combat")
+	bool bFatal = false;
 	
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
 	virtual void InitializeDefaultAttributes() const;
@@ -60,4 +71,10 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TObjectPtr<UAnimMontage> HitReactMontage;
+	
+
+
 };

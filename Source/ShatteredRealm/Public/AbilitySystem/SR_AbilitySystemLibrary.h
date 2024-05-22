@@ -26,6 +26,9 @@ public:
 	UFUNCTION(BlueprintPure,Category= "SR_AbilitySystemLibrary|WidgetController")
 	static  UAttributeMenuWidgetController* GetAttributeMenuWidgetController(const UObject* WorldContextObject);
 
-	UFUNCTION(BlueprintCallable, Category= "SR_AbilitySystemLibrary|Character")
+	UFUNCTION(BlueprintCallable, Category= "SR_AbilitySystemLibrary|CharacterClassDefaults")
 	static void InitializeDefaultAttributes(const UObject* WorldContextObject, ECharacterClass CharacterClass, float Level, UAbilitySystemComponent* ASC);
+
+	UFUNCTION(BlueprintCallable, Category= "SR_AbilitySystemLibrary|CharacterClassDefaults")
+	static void GiveStartupAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC);
 };
