@@ -8,6 +8,7 @@
 #include "GameFramework/PlayerController.h"
 #include "SR_PlayerController.generated.h"
 
+class IInteractableInterface;
 class USR_InputConfig;
 class UInputMappingContext;
 class UInputAction;
@@ -50,8 +51,9 @@ private:
 	void Move(const FInputActionValue& InputActionValue);
 
 	void CursorTrace();
-	IEnemyInterface* LastActor;
-	IEnemyInterface* ThisActor;
+	IInteractableInterface* LastHoverInteractable;
+	IInteractableInterface* CurrentHoverInteractable;
+	IInteractableInterface* TargetInteractable;
 	FHitResult CursorHit;
 
 	void AbilityInputTagPressed(FGameplayTag InputTag);

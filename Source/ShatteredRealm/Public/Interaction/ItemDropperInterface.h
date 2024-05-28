@@ -8,6 +8,7 @@
 
 class USR_ItemDataAsset;
 class USR_DropPoolDataAsset;
+class ASR_ItemPickUp;
 
 enum EItemRarity : int;
 struct FRollItemData;
@@ -30,11 +31,14 @@ class SHATTEREDREALM_API ISR_ItemDropperInterface
 public:
 
 	virtual USR_DropPoolDataAsset* GetDropPoolDataAsset() = 0;
-	void DropItems(FVector ItemSpawnLocation, AActor* ItemSpawner);
+	virtual TSubclassOf<ASR_ItemPickUp> GetItemPickUpClass() = 0;
+
+	void DropItems(AActor* ItemSpawner);
 
 private:
 	
 	FResultItemData GetResultItemData(USR_ItemDataAsset* ItemDataAsset, TEnumAsByte<EItemRarity> ItemRarity);
-	void SpawnItems(TArray<FResultItemData> SpawnItems, FVector ItemSpawnLocation, AActor* ItemSpawner);
+	void SpawnItems(TArray<FResultItemData> SpawnItems, AActor* ItemSpawner);
+	FVector GetSpawnLocation(AActor* ItemSpawner);
 	
 };

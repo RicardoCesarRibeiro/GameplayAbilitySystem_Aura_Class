@@ -9,6 +9,7 @@
 #include "Player/SR_PlayerController.h"
 #include "Player/SR_PlayerState.h"
 #include "UI/HUD/SR_HUD.h"
+#include "UI/Inventory/InventoryComponent.h"
 
 ASr_Character::ASr_Character()
 {
@@ -16,6 +17,7 @@ ASr_Character::ASr_Character()
 	GetCharacterMovement()->RotationRate = FRotator(0.f,400.f, 0.f );
 	GetCharacterMovement()->bConstrainToPlane=true;
 	GetCharacterMovement()->bSnapToPlaneAtStart = true;
+	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory Component"));
 
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;

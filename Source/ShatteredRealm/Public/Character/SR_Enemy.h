@@ -7,6 +7,7 @@
 #include "Interaction/EnemyInterface.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
 #include "AbilitySystem/Data/CharacterClassInfo.h"
+#include "Interaction/InteractableInterface.h"
 #include "SR_Enemy.generated.h"
 
 
@@ -15,7 +16,7 @@ class UWidgetComponent;
  * 
  */
 UCLASS()
-class SHATTEREDREALM_API ASr_Enemy : public ASr_CharacterBase, public IEnemyInterface
+class SHATTEREDREALM_API ASr_Enemy : public ASr_CharacterBase, public IEnemyInterface, public IInteractableInterface
 {
 	GENERATED_BODY()
 
@@ -23,10 +24,13 @@ public:
 	ASr_Enemy();
 
 
-	/** Enemy Interface */
+	/** Interactable Interface */
+	virtual void Interact(APawn* InteractingPawn) override;
+	virtual bool GetIsInteractable() override;
+	virtual float GetInteractRadius() override;
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
-	/** end Enemy Interface */
+	/** End Interactable Interface */
 
 	/**Combat Interface */
 	virtual int32 GetPlayerLevel() override;
@@ -45,6 +49,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Combat")
 	float BaseWalkSpeed = 350.f;
+
+	
+
 	
 protected:
 	virtual void BeginPlay() override;

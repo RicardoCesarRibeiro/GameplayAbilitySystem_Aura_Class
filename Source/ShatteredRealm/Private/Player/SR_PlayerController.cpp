@@ -13,6 +13,9 @@
 #include "Components/SplineComponent.h"
 #include "Input/SR_InputComponent.h"
 #include "Interaction/EnemyInterface.h"
+#include "Interaction/InteractableInterface.h"
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 ASr_PlayerController::ASr_PlayerController()
 {
@@ -40,6 +43,11 @@ void ASr_PlayerController::AutoRun()
 		if (DistanceToDestination <= AutoRunningAcceptanceRadius)
 		{
 			bAutoRunning = false;
+			if (TargetInteractable)
+			{
+				TargetInteractable->Interact(ControlledPawn);
+				TargetInteractable = nullptr;
+			}
 		}
 	}
 }
@@ -49,13 +57,27 @@ void ASr_PlayerController::CursorTrace()
 	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
 	if (!CursorHit.bBlockingHit) return;
 
-	LastActor = ThisActor;
-	ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
+	LastHoverInteractable = CurrentHoverInteractable;
+    IInteractableInterface* Interactable = Cast<IInteractableInterface>(CursorHit.GetActor());
+    if (Interactable && Interactable->GetIsInteractable())
+    {
+        CurrentHoverInteractable = Interactable;
+    }
+    else
+    {
+        CurrentHoverInteractable = nullptr;
+    }
 	
-	if(LastActor != ThisActor)
+	if(LastHoverInteractable != CurrentHoverInteractable)
 	{
-		if (LastActor) LastActor->UnHighlightActor();
-		if (ThisActor) ThisActor->HighlightActor();
+		if (LastHoverInteractable)
+		{
+			LastHoverInteractable->UnHighlightActor();
+		}
+		if (CurrentHoverInteractable)
+		{
+			CurrentHoverInteractable->HighlightActor();
+		}
 	}
 }
 
@@ -63,8 +85,16 @@ void ASr_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
 	if (InputTag.MatchesTagExact(FSr_GameplayTags::Get().InputTag_LMB))
 	{
-		bTargeting = ThisActor ? true : false;
-		bAutoRunning = false;
+		TargetInteractable = false;
+		
+		if (CurrentHoverInteractable && CurrentHoverInteractable->GetIsInteractable())
+		{
+			// Clicking on a Non Enemy
+			if (!UKismetSystemLibrary::DoesImplementInterface(CurrentHoverInteractable->_getUObject(), UEnemyInterface::StaticClass()))
+			{
+				TargetInteractable = CurrentHoverInteractable;
+			}
+		}
 	}
 }
 
@@ -83,6 +113,17 @@ void ASr_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 		const APawn* ControlledPawn = GetPawn();
 		if (FollowTime <= ShortPressThreshold && ControlledPawn)
 		{
+
+			// Interactable Pathing
+			if (AActor* TargetActor = Cast<AActor>(TargetInteractable))
+			{
+				FVector TargetDirection = (GetPawn()->GetActorLocation() - TargetActor->GetActorLocation()).GetSafeNormal(0.0f); 
+				CacheDestination = TargetActor->GetActorLocation() + (TargetDirection * TargetInteractable->GetInteractRadius());
+//				Debug Sphere
+//				UKismetSystemLibrary::DrawDebugSphere(this, CacheDestination, 50.f,12.f, FLinearColor::Red, 5.f, 2.f);
+			}
+	
+			
 			if (UNavigationPath * NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CacheDestination ))
 			{
 				Spline->ClearSplinePoints();

@@ -79,35 +79,35 @@ struct FRarityData
 {
 	GENERATED_BODY()
 	
-	UPROPERTY(EditAnywhere)
-	UStaticMesh* ItemMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UStaticMesh* ItemMesh = 0;
 
-	UPROPERTY(EditAnywhere)
-	UTexture2D* ItemIcon;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UTexture2D* ItemIcon = 0;
 
-	UPROPERTY(EditAnywhere)
-	int32 MinArmorValue;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 MinArmorValue = 0;
 	
-	UPROPERTY(EditAnywhere)
-	int32 MaxArmorValue;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 MaxArmorValue = 0;
 
-	UPROPERTY(EditAnywhere)
-	int32 MinMinDamageValue;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 MinMinDamageValue = 0;
 	
-	UPROPERTY(EditAnywhere)
-	int32 MaxMinDamageValue;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 MaxMinDamageValue = 0;
 	
-	UPROPERTY(EditAnywhere)
-	int32 MinMaxDamageValue;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 MinMaxDamageValue = 0;
 	
-	UPROPERTY(EditAnywhere)
-	int32 MaxMaxDamageValue;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 MaxMaxDamageValue = 0;
 
-	UPROPERTY(EditAnywhere)
-	int32 MinBlockValue;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 MinBlockValue = 0;
 	
-	UPROPERTY(EditAnywhere)
-	int32 MaxBlockValue;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 MaxBlockValue = 0;
 };
 
 USTRUCT(BlueprintType)
@@ -115,13 +115,13 @@ struct FRollItemData
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TEnumAsByte<EItemType> ItemType;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TEnumAsByte<EItemSlot> ItemSlot;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TMap<TEnumAsByte<EItemRarity>, FRarityData> ItemRarityMap;
 	
 };
@@ -134,28 +134,31 @@ struct FResultItemData
 
 //TODO: Generate Random Item Name
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TEnumAsByte<EItemType> ItemType;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TEnumAsByte<EItemSlot> ItemSlot;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TEnumAsByte<EItemRarity> ItemRarity;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UStaticMesh* ItemMesh;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UTexture2D* ItemIcon;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 ArmorValue = 0;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 MinDamageValue = 0;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 MaxDamageValue = 0;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 BlockValue = 0;
 	
 };

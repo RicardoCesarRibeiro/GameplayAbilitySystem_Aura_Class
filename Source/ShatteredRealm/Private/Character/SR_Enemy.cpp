@@ -26,6 +26,20 @@ ASr_Enemy::ASr_Enemy()
 	HealthBar->SetupAttachment(GetRootComponent());
 }
 
+void ASr_Enemy::Interact(APawn* InteractingPawn)
+{
+}
+
+bool ASr_Enemy::GetIsInteractable()
+{
+	return true;
+}
+
+float ASr_Enemy::GetInteractRadius()
+{
+	return 0.f;
+}
+
 void ASr_Enemy::HighlightActor()
 {
 	GetMesh()->SetRenderCustomDepth(true);

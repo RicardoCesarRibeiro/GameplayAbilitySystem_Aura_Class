@@ -1,9 +1,10 @@
 // Copyright Spellbound Studios.
-#pragma optimize("", off)
+
 
 #include "Interaction/ItemDropperInterface.h"
 
 #include "Actor/SR_ItemPickUp.h"
+#include "Field/FieldSystemNodes.h"
 #include "Items/SR_DropItemListDataAsset.h"
 #include "Items/SR_DropItemRarityListDataAsset.h"
 #include "Items/SR_DropPoolDataAsset.h"
@@ -12,7 +13,7 @@
 // Add default functionality here for any ISR_ItemDropper functions that are not pure virtual.
 
 
-void ISR_ItemDropperInterface::DropItems(FVector ItemSpawnLocation, AActor* ItemSpawner)
+void ISR_ItemDropperInterface::DropItems(AActor* ItemSpawner)
 {
 	if (GetDropPoolDataAsset() && ItemSpawner)
 	{
@@ -45,7 +46,7 @@ void ISR_ItemDropperInterface::DropItems(FVector ItemSpawnLocation, AActor* Item
 				ResultItems.Add(GetResultItemData(ItemDataAsset, Rarity));
 			}
 		}
-		SpawnItems(ResultItems, ItemSpawnLocation, ItemSpawner);
+		SpawnItems(ResultItems, ItemSpawner);
 	}
 }
 
@@ -56,6 +57,7 @@ FResultItemData ISR_ItemDropperInterface::GetResultItemData(USR_ItemDataAsset* I
 	{
 		ResultItemData.ItemType = ItemDataAsset->ItemData.ItemType;
 		ResultItemData.ItemSlot = ItemDataAsset->ItemData.ItemSlot;
+		ResultItemData.ItemRarity = ItemRarity;
 		ResultItemData.ItemMesh = ItemDataAsset->ItemData.ItemRarityMap[ItemRarity].ItemMesh;
 		ResultItemData.ItemIcon = ItemDataAsset->ItemData.ItemRarityMap[ItemRarity].ItemIcon;
 		ResultItemData.ArmorValue = FMath::RandRange(ItemDataAsset->ItemData.ItemRarityMap[ItemRarity].MinArmorValue,ItemDataAsset->ItemData.ItemRarityMap[ItemRarity].MaxArmorValue);
@@ -66,18 +68,28 @@ FResultItemData ISR_ItemDropperInterface::GetResultItemData(USR_ItemDataAsset* I
 	return ResultItemData;
 }
 
-void ISR_ItemDropperInterface::SpawnItems(TArray<FResultItemData> SpawnItems, FVector ItemSpawnLocation, AActor* ItemSpawner)
+void ISR_ItemDropperInterface::SpawnItems(TArray<FResultItemData> SpawnItems, AActor* ItemSpawner)
 {
 	if (ItemSpawner)
 	{
 		for (FResultItemData& SpawnItem : SpawnItems)
 		{
 			FActorSpawnParameters SpawnParams;
-			ASR_ItemPickUp* ItemPickUp = ItemSpawner->GetWorld()->SpawnActor<ASR_ItemPickUp>(ASR_ItemPickUp::StaticClass(), ItemSpawnLocation, FRotator::ZeroRotator, SpawnParams);
+			SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+			ASR_ItemPickUp* ItemPickUp = ItemSpawner->GetWorld()->SpawnActor<ASR_ItemPickUp>(GetItemPickUpClass(), GetSpawnLocation(ItemSpawner), FRotator::ZeroRotator, SpawnParams);
 			if (ItemPickUp)
 			{
-				ItemPickUp->Init(SpawnItem);
+				ItemPickUp->Init(SpawnItem,ItemSpawner);
 			}
 		}
 	}
+}
+
+FVector ISR_ItemDropperInterface::GetSpawnLocation(AActor* ItemSpawner)
+{
+	float Radius = FMath::RandRange(150.f,250.f);
+	FVector Direction = FMath::VRand();
+	Direction.Z = 0.0f;
+	Direction = Direction.GetSafeNormal(0.0f);
+	return ItemSpawner->GetActorLocation() + (Direction * Radius);
 }

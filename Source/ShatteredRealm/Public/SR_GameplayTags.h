@@ -17,13 +17,17 @@ struct FSr_GameplayTags
 public:
     static const FSr_GameplayTags& Get() { return GameplayTags; }
     static void InitializeNativeGameplayTags();
-
-
+	
+	/*
+	// Primary Attributes
+	*/
 	FGameplayTag Attributes_Primary_Strength;
 	FGameplayTag Attributes_Primary_Intelligence;
 	FGameplayTag Attributes_Primary_Dexterity;
 	FGameplayTag Attributes_Primary_Vitality;
-	
+	/*
+	// Secondary Attributes
+	*/
     FGameplayTag Attributes_Secondary_MaxHealth;
 	FGameplayTag Attributes_Secondary_MaxMana;
 	FGameplayTag Attributes_Secondary_HealthRegen;
@@ -50,8 +54,9 @@ public:
 	FGameplayTag Attributes_Secondary_DashCooldown;
 	FGameplayTag Attributes_Secondary_AreaOfEffect;
 	FGameplayTag Attributes_Secondary_HealingEffectiveness;
-
-
+	/*
+	// Input Tags
+	*/
 	FGameplayTag InputTag_LMB;
 	FGameplayTag InputTag_RMB;
 	FGameplayTag InputTag_SPC;
@@ -59,14 +64,36 @@ public:
 	FGameplayTag InputTag_2;
 	FGameplayTag InputTag_3;
 	FGameplayTag InputTag_4;
-
-
+	/*
+	// Item Slots
+	*/
+	FGameplayTag Item_Slot_Head;
+	FGameplayTag Item_Slot_Chest;
+	FGameplayTag Item_Slot_Gloves;
+	FGameplayTag Item_Slot_Legs;
+	FGameplayTag Item_Slot_Belt;
+	FGameplayTag Item_Slot_MainHand;
+	FGameplayTag Item_Slot_OffHand;
+	FGameplayTag Item_Slot_TwoHanded;
+	FGameplayTag Item_Slot_Neck;
+	FGameplayTag Item_Slot_Ring;
+	/*
+	// Item FX
+	*/
+	FGameplayTag Item_FX_Fire;
+	FGameplayTag Item_FX_Ice;
+	FGameplayTag Item_FX_Lightning;
+	FGameplayTag Item_FX_Magic;
+	/*
+	// Game Tags
+	*/
 	FGameplayTag Damage;
 	FGameplayTag Effects_HitReact;
 	FGameplayTag Effects_Death;
 
 
 private:
+	
     static FSr_GameplayTags GameplayTags;
  
 };

@@ -12,16 +12,13 @@ void FSr_GameplayTags::InitializeNativeGameplayTags()
 	/*
 	// Primary Attributes
 	*/
-	
 	GameplayTags.Attributes_Primary_Strength = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Primary.Strength"), FString("Increases Physical Damage, Chance to Block and Physical Armor "));
 	GameplayTags.Attributes_Primary_Intelligence = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Primary.Intelligence"), FString("Increases Magical Damage, Special Ability Regen and Magic Armor"));
 	GameplayTags.Attributes_Primary_Dexterity = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Primary.Dexterity"), FString("Increases Attack Speed, Movement Speed and Chance to Evade"));
 	GameplayTags.Attributes_Primary_Vitality = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Primary.Vitality"), FString("Increases Maximum Health, Health Regen and Healing Effectiveness"));
-
 	/*
 	// Secondary Attributes
 	*/
-	
 	GameplayTags.Attributes_Secondary_MaxHealth = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Secondary.MaxHealth"), FString("Maximum Amount of Health"));
 	GameplayTags.Attributes_Secondary_MaxMana = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Secondary.MaxMana"), FString("Maximum Amount of Mana"));
 	GameplayTags.Attributes_Secondary_HealthRegen = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Secondary.HealthRegen"), FString("Amount of Health Regenerated every second"));
@@ -48,11 +45,9 @@ void FSr_GameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Attributes_Secondary_DashCooldown = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Secondary.DashCooldown"), FString("Reduces the Dash recovery cooldown"));
 	GameplayTags.Attributes_Secondary_AreaOfEffect = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Secondary.AreaOfEffect"), FString("Increases your Global Area of Effect"));
 	GameplayTags.Attributes_Secondary_HealingEffectiveness = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Secondary.HealingEffectiveness"), FString("Increases your Global Healing Effectiveness"));
-
 	/*
 	// Input Tags
 	*/
-	
 	GameplayTags.InputTag_LMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.LMB"), FString("Input Tag for Left Mouse Button"));
 	GameplayTags.InputTag_RMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.RMB"), FString("Input Tag for Right Mouse Button"));
 	GameplayTags.InputTag_SPC = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.SPC"), FString("Input Tag for Spacebar Key"));
@@ -60,9 +55,30 @@ void FSr_GameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.InputTag_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.2"), FString("Input Tag for 2 Key"));
 	GameplayTags.InputTag_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.3"), FString("Input Tag for 3 Key"));
 	GameplayTags.InputTag_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.4"), FString("Input Tag for 4 Key"));
-
+	/*
+	// Item Slots
+	*/
+	GameplayTags.Item_Slot_Head = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.Slot.Head"), FString("The item can be equipped on the Head slot."));
+	GameplayTags.Item_Slot_Chest = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.Slot.Chest"), FString("The item can be equipped on the Chest slot."));
+	GameplayTags.Item_Slot_Gloves = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.Slot.Gloves"), FString("The item can be equipped on the Gloves slot."));
+	GameplayTags.Item_Slot_Legs = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.Slot.Legs"), FString("The item can be equipped on the Legs slot."));
+	GameplayTags.Item_Slot_Belt = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.Slot.Belt"), FString("The item can be equipped on the Belt slot."));
+	GameplayTags.Item_Slot_MainHand = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.Slot.MainHand"), FString("The item can be equipped on the MainHand slot."));
+	GameplayTags.Item_Slot_OffHand = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.Slot.OffHand"), FString("The item can be equipped on the OffHand slot."));
+	GameplayTags.Item_Slot_TwoHanded = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.Slot.TwoHanded"), FString("The item will use both MainHand and OffHand slots."));
+	GameplayTags.Item_Slot_Neck = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.Slot.Neck"), FString("The item can be equipped on the Neck slot."));
+	GameplayTags.Item_Slot_Ring = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.Slot.Ring"), FString("The item can be equipped on the Ring slot."));
+	/*
+	// Item FX
+	*/
+	GameplayTags.Item_FX_Fire = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.FX.Fire"), FString("The item is imbued with Fire."));
+	GameplayTags.Item_FX_Ice = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.FX.Ice"), FString("The item is imbued with Ice."));
+	GameplayTags.Item_FX_Lightning = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.FX.Lightning"), FString("The item is imbued with Lightning."));
+	GameplayTags.Item_FX_Magic = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Item.FX.Magic"), FString("The item is imbued with Magic."));
+	/*
+	// Game Tags
+	*/
 	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"), FString("Damage"));
 	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.HitReact"), FString("Tag Granted when Ht Reactng"));
 	GameplayTags.Effects_Death = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.Death"), FString("Tag Granted when you Die"));
-
 }
