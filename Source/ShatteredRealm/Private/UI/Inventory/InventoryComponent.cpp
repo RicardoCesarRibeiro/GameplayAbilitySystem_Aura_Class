@@ -13,7 +13,7 @@ UInventoryComponent::UInventoryComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	MaxStorageRows = 3;
-	MaxStorageColumns = 5;
+	MaxStorageColumns = 6;
 }
 
 
@@ -58,6 +58,8 @@ bool UInventoryComponent::AddItem(FResultItemData NewItem, int32 Row, int32 Colu
 	{
 		ItemStorageMap.Add(StorageLocation, ItemInventory);
 	}
+	
+	OnInventoryStorageChanged.Broadcast(FItemStorageMap(ItemStorageMap));
 	return true;
 }
 

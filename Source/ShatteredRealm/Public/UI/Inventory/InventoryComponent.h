@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "InventoryComponent.generated.h"
 
+
 class UItemInventory;
 struct FResultItemData;
 struct FCombinableKey;
@@ -44,8 +45,30 @@ FORCEINLINE uint32 GetTypeHash(const FStorageLocation& Key)
 	return HashCombine(GetTypeHash(Key.Row), GetTypeHash(Key.Column));
 }
 
+USTRUCT(BlueprintType)
+struct FItemStorageMap
+{
+	GENERATED_BODY()
+	
+	FItemStorageMap()
+	{
+		ItemStorageMap = TMap<FStorageLocation, UItemInventory*>();
+	}
+	
+	FItemStorageMap(const TMap<FStorageLocation, UItemInventory*>& InItemStorageMap)
+	{
+		ItemStorageMap = InItemStorageMap;
+	}
+	
+	UPROPERTY(BlueprintReadOnly)
+	TMap<FStorageLocation, UItemInventory*> ItemStorageMap;
+};
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryStorageChanged, FItemStorageMap, ItemStorageMap);
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SHATTEREDREALM_API UInventoryComponent : public UActorComponent
+
 {
 	GENERATED_BODY()
 
@@ -61,6 +84,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	TMap<FStorageLocation, UItemInventory*> ItemStorageMap;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnInventoryStorageChanged OnInventoryStorageChanged;
 	
 protected:
 	// Called when the game starts

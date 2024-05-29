@@ -12,12 +12,14 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType, Blueprintable)
 class SHATTEREDREALM_API UItemInventory : public UObject
 {
 	GENERATED_BODY()
 
 public:
+
+	UItemInventory();
 	
 	UPROPERTY(BlueprintReadOnly)
 	FResultItemData ItemData;
